@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<h1>🎬 Hybrid Movie Recommendation System</h1>
+
+<!-- EXISTING USER -->
+<form method="POST">
+    <input type="text" name="movie" placeholder="Enter movie name">
+    <button type="submit">Recommend</button>
+</form>
+
+<!-- NEW USER -->
+<h2>🆕 New User?</h2>
+<form method="POST">
+
+    <select name="genre" required>
+        <option value="">Select Genre</option>
+        <option>Action</option>
+        <option>Adventure</option>
+        <option>Animation</option>
+        <option>Comedy</option>
+        <option>Drama</option>
+        <option>Romance</option>
+        <option>Thriller</option>
+    </select>
+
+    <select name="language" required>
+        <option value="">Select Language</option>
+        <option>English</option>
+        <option>Hindi</option>
+        <option>Telugu</option>
+    </select>
+
+    <button type="submit">Get Popular Movies</button>
+</form>
+
+<!-- RESULTS -->
+{% if content %}
+<h2>Results for "{{ movie_name }}"</h2>
+
+<h3>📌 Content-Based</h3>
+<p>{{ content_exp }}</p>
+{% for m in content %}
+<div class="card">{{ m }}</div>
+{% endfor %}
+
+<h3>📌 Collaborative</h3>
+<p>{{ collab_exp }}</p>
+{% for m in collab %}
+<div class="card">{{ m }}</div>
+{% endfor %}
+
+<h3>📌 Hybrid</h3>
+<p>{{ hybrid_exp }}</p>
+{% for m in hybrid %}
+<div class="card highlight">{{ m }}</div>
+{% endfor %}
+{% endif %}
+
+<!-- COLD START -->
+{% if cold %}
+<h2>🔥 Popular {{ genre }} Movies</h2>
+<p>{{ cold_exp }}</p>
+
+{% for m in cold %}
+<div class="card highlight">{{ m }}</div>
+{% endfor %}
+{% endif %}
+
+</body>
+</html>
