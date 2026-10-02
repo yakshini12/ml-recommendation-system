@@ -67,6 +67,15 @@ p {
     color: #dcdcdc;
 }
 
+.error {
+    color: #ffd1d1;
+    background: #6f1d2b;
+    margin: 12px auto;
+    padding: 12px;
+    max-width: 640px;
+    border-radius: 8px;
+}
+
 /* Cards */
 .card {
     background: #1f1f1f;

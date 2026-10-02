@@ -1,0 +1,7 @@
+movieId,title,genres
+3,Comedy Movie,Comedy
+6,Romance Movie,Romance
+2,Action Two,Action|Adventure
+5,Drama Movie,Drama
+1,Action One,Action|Adventure
+4,Thriller Movie,Thriller

@@ -9,6 +9,10 @@
 
 <h1>🎬 Hybrid Movie Recommendation System</h1>
 
+{% if error %}
+<p class="error" role="alert">{{ error }}</p>
+{% endif %}
+
 <!-- EXISTING USER -->
 <form method="POST">
     <input type="text" name="movie" placeholder="Enter movie name">
@@ -19,7 +23,7 @@
 <h2>🆕 New User?</h2>
 <form method="POST">
 
-    <select name="genre" required>
+    <select name="genre">
         <option value="">Select Genre</option>
         <option>Action</option>
         <option>Adventure</option>
@@ -28,13 +32,6 @@
         <option>Drama</option>
         <option>Romance</option>
         <option>Thriller</option>
-    </select>
-
-    <select name="language" required>
-        <option value="">Select Language</option>
-        <option>English</option>
-        <option>Hindi</option>
-        <option>Telugu</option>
     </select>
 
     <button type="submit">Get Popular Movies</button>

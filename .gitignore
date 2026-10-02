@@ -1,0 +1,13 @@
+# Python bytecode and test artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+
+# Local Python environments
+.venv/
+venv/
+env/
+
+# Local ratings data (movies.csv is the tracked catalog)
+/ratings.csv
