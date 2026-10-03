@@ -18,6 +18,7 @@ MOVIES_PATH_ENV = "MOVIES_CSV_PATH"
 RATINGS_PATH_ENV = "RATINGS_CSV_PATH"
 RATINGS_MAX_ROWS_ENV = "RATINGS_MAX_ROWS"
 DEFAULT_RATINGS_NROWS = 200_000
+DEMO_RATINGS_PATH = PROJECT_DIR / "data" / "demo_ratings.csv"
 
 
 def parse_ratings_limit(value: str) -> int | None:
@@ -378,9 +379,20 @@ class HybridMovieRecommender:
 
 
 def load_default_recommender() -> HybridMovieRecommender:
+    """Load configured ratings, or the bundled small fixture for the Flask demo."""
     raw_limit = os.environ.get(RATINGS_MAX_ROWS_ENV)
     ratings_nrows = (
         DEFAULT_RATINGS_NROWS if raw_limit is None else parse_ratings_limit(raw_limit)
     )
-    movies, ratings = load_data(ratings_nrows=ratings_nrows)
+    configured_ratings_path = os.environ.get(RATINGS_PATH_ENV)
+    ratings_path = resolve_data_path(
+        configured_ratings_path,
+        env_var=RATINGS_PATH_ENV,
+        default_name="ratings.csv",
+    )
+    if configured_ratings_path is None or not ratings_path.is_file():
+        ratings_path = DEMO_RATINGS_PATH
+    movies, ratings = load_data(
+        ratings_path=ratings_path, ratings_nrows=ratings_nrows
+    )
     return HybridMovieRecommender(movies, ratings)

@@ -1,5 +1,7 @@
 """Flask application for the hybrid movie recommender."""
 
+import os
+
 from flask import Flask, render_template, request
 
 from model import HybridMovieRecommender, load_default_recommender
@@ -58,4 +60,8 @@ app = create_app()
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(
+        host=os.environ.get("HOST", "127.0.0.1"),
+        port=int(os.environ.get("PORT", "5000")),
+        debug=False,
+    )
